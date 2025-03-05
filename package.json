@@ -1,0 +1,16 @@
+{
+  "name": "minecraft-bot",
+  "version": "1.0.0",
+  "description": "Minecraft Bot Server",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mineflayer": "^4.0.0",
+    "body-parser": "^1.19.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

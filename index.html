@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Bot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f3f3;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Start Minecraft Bot</h1>
+        <input type="text" id="server-ip" placeholder="Enter server IP" /><br>
+        <input type="text" id="server-port" placeholder="Enter server port" /><br>
+        <button id="start-bot-btn">Start Bot</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const startBotBtn = document.getElementById('start-bot-btn');
+
+            startBotBtn.addEventListener('click', function() {
+                const serverIp = document.getElementById('server-ip').value;
+                const serverPort = document.getElementById('server-port').value;
+
+                if (serverIp && serverPort) {
+                    // Send POST request with IP and port
+                    fetch('http://localhost:3000/start-bot', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ serverIp, serverPort })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message || 'Bot started successfully!');
+                    })
+                    .catch(error => {
+                        alert('Error: Failed to start the bot.');
+                        console.error('Error:', error);
+                    });
+                } else {
+                    alert('Please enter a valid IP and port!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
